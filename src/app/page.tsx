@@ -10,11 +10,9 @@ export default function Home() {
   const buttonRef = useRef<HTMLAnchorElement | null>(null);
 
   useEffect(() => {
-    // Detect system theme on first render
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     setTheme(mediaQuery.matches ? "dark" : "light");
 
-    // Listen for changes in system theme
     const handleThemeChange = (e: MediaQueryListEvent) => {
       setTheme(e.matches ? "dark" : "light");
     };
@@ -27,7 +25,6 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    // Keep track of the current time
     const updateTime = () => {
       const now = new Date();
       const hh = String(now.getHours()).padStart(2, "0");
@@ -52,7 +49,6 @@ export default function Home() {
     }
   };
 
-  // Updated styles for a more natural light-mode button
   const dynamicStyles: { [key: string]: React.CSSProperties } = {
     container: {
       backgroundColor: theme === "dark" ? "#000" : "#fff",
@@ -72,13 +68,10 @@ export default function Home() {
       bottom: "20px",
       padding: "10px 20px",
       borderRadius: "12px",
-      // Make the button more subtle in light mode
       background:
-        theme === "dark"
-          ? "rgba(255, 255, 255, 0.1)" // semi-transparent white on dark
-          : "rgba(0, 0, 0, 0.05)", // very light overlay on white
+        theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.05)",
       backdropFilter: "blur(10px)",
-      color: theme === "dark" ? "#fff" : "#333", // a slightly darker text in light mode
+      color: theme === "dark" ? "#fff" : "#333",
       textDecoration: "none",
       fontWeight: 500,
       border:
@@ -90,7 +83,6 @@ export default function Home() {
       gap: "8px",
       cursor: "pointer",
       transition: "all 0.3s ease",
-      // A slight box shadow in light mode for "lift"
       boxShadow: theme === "dark" ? "none" : "0 2px 8px rgba(0, 0, 0, 0.05)",
     },
     icon: {
@@ -104,14 +96,13 @@ export default function Home() {
         <QRCodeCanvas
           value={time}
           size={256}
-          // Swap QR code colors based on theme
           bgColor={theme === "dark" ? "#000000" : "#FFFFFF"}
           fgColor={theme === "dark" ? "#FFFFFF" : "#000000"}
           style={dynamicStyles.qrCode}
         />
       )}
       <a
-        href="https://github.com"
+        href="https://github.com/s8ngyu/qr-clock"
         target="_blank"
         rel="noopener noreferrer"
         style={dynamicStyles.githubButton}
@@ -122,7 +113,6 @@ export default function Home() {
         GitHub
       </a>
 
-      {/* CSS for the transparent, smooth cursor shadow */}
       <style jsx>{`
         a {
           position: relative;
